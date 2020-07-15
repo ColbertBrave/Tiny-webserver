@@ -4,7 +4,7 @@
 //#include<errno.h>
 #include <iostream>
 #include <netinet/in.h>
-#include <sys/socket.h>
+#include <sys/socket.h> //Windows has no sys/socket.h, use winsock2.h instead
 #include <sys/types.h>
 #include <unistd.h>
 #include <arpa/inet.h> 
@@ -31,7 +31,6 @@ void my_send(int connfd, char *msg)
         else
             strcpy(sendbuf, msg);
         
-
         //cin >> sendbuf;
         bool ans = (*sendbuf);
         //sleep(1);
@@ -57,7 +56,6 @@ void my_send(int connfd, char *msg)
 int main(int argc, char **argv)
 {
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    
     
     seraddr.sin_family = AF_INET;
     inet_pton(AF_INET,argv[1],&seraddr.sin_addr);
